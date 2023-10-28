@@ -1,6 +1,7 @@
 {
-  "name": "Make XGM great again!",
   "short_name": "XGM",
+  "name": "XGM - Next",
+  "description": "Make XGM great again!",
   "id": "/xgm-next/",
   "scope": "/xgm-next/",
   "start_url": "/xgm-next/",
@@ -27,13 +28,13 @@
   "display": "standalone",
   "screenshots": [
     {
-      "src": "images/screenshots/1080x1440.png",
+      "src": "images/screenshots/app/1080x1440.png",
       "type": "image/png",
       "sizes": "1080x1440",
       "form_factor": "narrow"
     },
     {
-      "src": "images/screenshots/1500x1080.png",
+      "src": "images/screenshots/app/1500x1080.png",
       "type": "image/png",
       "sizes": "1500x1080",
       "form_factor": "wide"
