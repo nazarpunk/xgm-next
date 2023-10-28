@@ -22,7 +22,7 @@
 
     <script>
         navigator.serviceWorker
-            .register('./xgm-next/sw.js', {scope: './xgm-next/'})
+            .register('./sw.js', {scope: './'})
             .then(reg => {
                 console.log('Registration succeeded. Scope is ' + reg.scope)
             })
