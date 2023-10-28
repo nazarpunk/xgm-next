@@ -24,5 +24,19 @@
   ],
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
-  "display": "standalone"
+  "display": "standalone",
+  "screenshots": [
+    {
+      "src": "images/screenshots/1080x1440.png",
+      "type": "image/png",
+      "sizes": "1080x1440",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "images/screenshots/1500x1080.png",
+      "type": "image/png",
+      "sizes": "1500x1080",
+      "form_factor": "wide"
+    }
+  ]
 }
