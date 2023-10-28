@@ -1,6 +1,7 @@
 {
   "name": "XGM - Next",
   "short_name": "XGM",
+  "id": "/xgm-next/",
   "scope": "/xgm-next/",
   "start_url": "/xgm-next/",
   "icons": [
