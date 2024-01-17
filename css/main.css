@@ -1,3 +1,67 @@
+:root {
+    --main-content-max-width: 780px;
+}
+
+html {
+    height: 100%;
+    color-scheme: var(--color-scheme);
+}
+
 body {
     margin: 0;
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-areas:
+    "header     header"
+    "sidemenu   main"
+    "sidemenu   comments"
+    "sidemenu   footer";
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-columns: 300px 1fr;
+    background-color: var(--background);
+
+    font-family: Verdana, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+
+.main-header {
+    grid-area: header;
+    border: 2px solid aqua;
+    min-height: 130px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.main-sidemenu {
+    grid-area: sidemenu;
+    border: 2px solid cadetblue;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.main-content {
+    grid-area: main;
+    border: 2px solid brown;
+}
+
+.main-content-inner {
+    max-width: var(--main-content-max-width);
+    border: 2px solid cornflowerblue;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.main-comments {
+    grid-area: comments;
+    border: 2px solid crimson;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.main-footer {
+    grid-area: footer;
+    border: 2px solid darkgreen;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }

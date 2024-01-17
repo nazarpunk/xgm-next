@@ -1,11 +1,21 @@
-class BasicElement extends HTMLElement {
-    connectedCallback() {
+import './color/day-night.js'
 
-        this.textContent = 'Just a basic custom element. + 2222'
-    }
-}
+import {ColorScheme} from './color/color-scheme.js'
+import {Color} from './color/color.js'
 
-console.log(11)
+/*
+const light = new ColorScheme()
+const dark = new ColorScheme()
+
+// https://gist.github.com/mjackson/5311256
+
+addEventListener('input', e => {
+    const scheme = inputScheme.checked ? dark : light
+    if (e.target.type === 'color' && e.target.dataset.name !== null) scheme.setColor(e.target.dataset.name, e.target.value)
+
+    const c = Color.fromHex(e.target.value)
+
+})
 
 
-customElements.define('basic-element', BasicElement)
+ */

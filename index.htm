@@ -20,7 +20,7 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'nonce-rAnd0m' 'sha256-C9Pc74x5BP660fRg4HJ6AmFM9IpoprZO7TSDFKmjYzw='; worker-src 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; worker-src 'self'; style-src 'self' 'unsafe-inline' ; script-src 'self' 'nonce-rAnd0m' 'sha256-C9Pc74x5BP660fRg4HJ6AmFM9IpoprZO7TSDFKmjYzw=';">
 
     <meta property="og:site_name" content="XGM - Next"/>
     <meta property="og:title" content="Make XGM great again!"/>
@@ -35,8 +35,8 @@
     <meta name="twitter:image:src" content="https://raw.githubusercontent.com/nazarpunk/xgm-next/master/images/opengraph/repository-open-graph-template.png"/>
     <meta name="twitter:card" content="summary_large_image"/>
 
-    <link rel="search" type="application/opensearchdescription+xml" href="opensearch.xml" title="XGM - Next">
-
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="./js/main.mjs" type="module" defer></script>
     <script nonce="rAnd0m">
         navigator.serviceWorker
             .register('./sw.js', {scope: './'})
@@ -47,12 +47,103 @@
                 console.log('Registration failed with ' + error)
             })
     </script>
+    <script nonce="rAnd0m">
+        const cd = {
+            background: ['#ffffff', '#000000']
+        }
+        let j
+        try {
+            j = JSON.parse(localStorage.getItem('theme'))
+        } catch (_) {
+
+        }
+        const cn = {...cd}
+        if (j) {
+            console.log(j)
+        }
+
+        const themeKey = 'prefers-color-scheme'
+        const setTheme = (theme, save) => {
+            const d = document.documentElement
+            d.classList.remove('light', 'dark')
+            d.classList.add(theme)
+            d.style.setProperty('--color-scheme', theme)
+            if (save) localStorage.setItem(themeKey, theme)
+        }
+
+        window.PrefersColorScheme = {
+            has: () => !!localStorage.getItem(themeKey),
+            get: () => {
+                const theme = localStorage.getItem(themeKey)
+                if (theme === 'light' || theme === 'dark') return theme
+                if (window.matchMedia) {
+                    if (window.matchMedia('(prefers-color-scheme: light)').matches) return 'light'
+                    if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark'
+                }
+                return 'light'
+            },
+            set: theme => {
+                switch (theme) {
+                    case 'light':
+                    case 'dark':
+                        return setTheme(theme, true)
+                    default:
+                        localStorage.removeItem(themeKey)
+                        setTheme(PrefersColorScheme.get(), false)
+                }
+            },
+            toggle: () => {
+                let theme = PrefersColorScheme.get()
+                if (theme === 'light') theme = 'dark'
+                else if (theme === 'dark') theme = 'light'
+                setTheme(theme, true)
+                document.querySelectorAll('[theme-radio]').forEach(input => input.checked = input.value === theme)
+            }
+        }
+
+        setTheme(PrefersColorScheme.get())
+    </script>
 </head>
 <body>
+<!-- https://www.w3.org/TR/2013/CR-html5-20130806/sections.html#the-article-element -->
+<header class="main-header">
+    <h1>Шапка</h1>
+    <day-night></day-night>
+</header>
+<aside class="main-sidemenu">
+    <h1>Меню</h1>
+    <div>
+        <label>
+            <input type="radio" name="theme-radio" value="light" autocomplete="off">
+            Светлая тема
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="radio" name="theme-radio" value="dark" autocomplete="off">
+            Тёмная тема
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="radio" name="theme-radio" value="no-preference" autocomplete="off">
+            Авто тема
+        </label>
+    </div>
+</aside>
+<main class="main-content">
+    <div class="main-content-inner">
+        <h1>Контент</h1>
+        <h2>Фон и цвет текста</h2>
+        <label>
+            <input type="color" data-name="background">
+        </label>
+        <p>Пожалуй самая важная пара цветов, которая, как и ковёр, задаёт стиль всему сайту.</p>
 
-<main>
-    <h1>Новый дизайн XGM</h1>
+    </div>
 </main>
+<section class="main-comments"><h1>Комментарии</h1></section>
+<footer class="main-footer"><h1>Подвал</h1></footer>
 
 </body>
 </html>
