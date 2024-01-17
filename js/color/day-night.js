@@ -76,11 +76,7 @@ export class DayNight extends HTMLElement {
             .dark {
                 --slider-bg: linear-gradient(-45deg, #222, #000030);
             }
-
-            .dark .slider {
-                background: var(--background-night);
-            }
-
+            
             .container {
                 position: relative;
                 width: 100%;

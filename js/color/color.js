@@ -1,4 +1,6 @@
 export class Color {
+    hex = '#000000'
+
     h = 0
     s = 0
     l = 0
@@ -9,29 +11,49 @@ export class Color {
     a = 0 // [0, 255]
 
     /**
-     * https://www.30secondsofcode.org/js/s/hex-to-rgb/
      * @param {string} hex
      * @returns {Color}
      */
     static fromHex(hex) {
+        const c = new Color()
+        c.hex = hex
+        return c
+    }
+
+    /**
+     * https://www.30secondsofcode.org/js/s/hex-to-rgb/
+     * @returns {Color}
+     */
+    hex2rgb() {
         let alpha = false
-        let h = hex.slice(hex.startsWith('#') ? 1 : 0)
+        let h = this.hex.slice(this.hex.startsWith('#') ? 1 : 0)
         if (h.length === 3) h = [...h].map(x => x + x).join('')
         else if (h.length === 8) alpha = true
         h = parseInt(h, 16)
 
-        const c = new Color()
-        c.r = h >>> (alpha ? 24 : 16)
-        c.g = (h & (alpha ? 0x00ff0000 : 0x00ff00)) >>> (alpha ? 16 : 8)
-        c.b = (h & (alpha ? 0x0000ff00 : 0x0000ff)) >>> (alpha ? 8 : 0)
-        c.a = alpha ? h & 0x000000ff : 255
-
-        return c.rgb2hsl()
+        this.r = h >>> (alpha ? 24 : 16)
+        this.g = (h & (alpha ? 0x00ff0000 : 0x00ff00)) >>> (alpha ? 16 : 8)
+        this.b = (h & (alpha ? 0x0000ff00 : 0x0000ff)) >>> (alpha ? 8 : 0)
+        this.a = alpha ? h & 0x000000ff : 255
+        return this
     }
 
     // noinspection JSUnusedGlobalSymbols
     get rgb2css() {
         return `rgb(${this.r}, ${this.g}, ${this.b})`
+    }
+
+    /** @returns {Color} */
+    rgbMod255() {
+        const trunc = p => Math.min(Math.round(p * 255), 255)
+        this.r = trunc(this.r)
+        this.g = trunc(this.g)
+        this.b = trunc(this.b)
+        return this
+    }
+
+    get rgb2hex() {
+        return `#${this.r.toString(16).padStart(2, '0')}${this.g.toString(16).padStart(2, '0')}${this.b.toString(16).padStart(2, '0')}`
     }
 
     /**
@@ -75,9 +97,9 @@ export class Color {
      * https://gist.github.com/mjackson/5311256
      * @returns {Color}
      */
-    hsl2rgb(h, s, l) {
-        if (s === 0) {
-            this.r = this.g = this.b = l // achromatic
+    hsl2rgb() {
+        if (this.s === 0) {
+            this.r = this.g = this.b = this.l // achromatic
             return this
         }
 
@@ -90,21 +112,23 @@ export class Color {
             return p
         }
 
-        const q = l < 0.5 ? l * (1 + s) : l + s - l * s
-        const p = 2 * l - q
+        const q = this.l < 0.5 ? this.l * (1 + this.s) : this.l + this.s - this.l * this.s
+        const p = 2 * this.l - q
 
-        this.r = hue2rgb(p, q, h + 1 / 3)
-        this.g = hue2rgb(p, q, h)
-        this.b = hue2rgb(p, q, h - 1 / 3)
+        this.r = hue2rgb(p, q, this.h + 1 / 3)
+        this.g = hue2rgb(p, q, this.h)
+        this.b = hue2rgb(p, q, this.h - 1 / 3)
 
         return this
-
-        //return [ r * 255, g * 255, b * 255 ]
     }
 
     // noinspection JSUnusedGlobalSymbols
     get hsl2css() {
         return `hsl(${Math.floor(this.h * 360)}, ${Math.round(this.s * 100)}%, ${Math.round(this.l * 100)}%)`
+    }
+
+    get hsl2hex() {
+        return this.hsl2rgb().rgbMod255().rgb2hex
     }
 
 }
