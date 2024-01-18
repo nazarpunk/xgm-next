@@ -1,0 +1,90 @@
+:root {
+  --font-size: 1rem;
+  --line-height: 1.6rem;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: Verdana, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  height: 100%;
+  margin: 0;
+  padding: 1rem;
+  color: var(--color);
+  background: var(--background);
+}
+
+pre {
+  font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+  overflow: auto;
+  min-width: 0;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: var(--linkColor);
+}
+.link-underline a:not(.button) {
+  text-decoration: underline;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+.muted {
+  color: var(--colorMuted);
+}
+
+.color-label {
+  display: flex;
+  align-items: center;
+}
+.color-label input {
+  margin: 0.6rem 0.6rem 0.6rem 0;
+}
+
+.mb {
+  margin-bottom: 1rem !important;
+}
+
+.button {
+  font-family: Verdana, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: var(--font-size);
+  line-height: 1;
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0.4rem 0.6rem;
+  text-align: center;
+  color: var(--button-color, var(--color));
+  border: 0;
+  border-radius: 3px;
+  background-color: var(--button-bg, transparent);
+  text-shadow: none;
+}
+.button:hover {
+  cursor: pointer;
+}
+
+.button-primary {
+  --button-color: var(--buttonPrimaryColor);
+  --button-bg: var(--buttonPrimaryBg);
+}
+
+.button-info {
+  --button-color: var(--buttonInfoColor);
+  --button-bg: var(--buttonInfoBg);
+}
+
+.button-danger {
+  --button-color: var(--buttonDangerColor);
+  --button-bg: var(--buttonDangerBg);
+}
+
+/*# sourceMappingURL=main.css.map */

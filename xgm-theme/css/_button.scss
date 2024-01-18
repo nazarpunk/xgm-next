@@ -1,0 +1,34 @@
+.button {
+	font-family: Verdana, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: var(--font-size);
+	line-height: 1;
+	display: inline-block;
+	box-sizing: border-box;
+	margin: 0;
+	padding: .4rem .6rem;
+	text-align: center;
+	color: var(--button-color, var(--color));
+	border: 0;
+	border-radius: 3px;
+	background-color: var(--button-bg, transparent);
+	text-shadow: none;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.button-primary {
+	--button-color: var(--buttonPrimaryColor);
+	--button-bg: var(--buttonPrimaryBg);
+}
+
+.button-info {
+	--button-color: var(--buttonInfoColor);
+	--button-bg: var(--buttonInfoBg);
+}
+
+.button-danger {
+	--button-color: var(--buttonDangerColor);
+	--button-bg: var(--buttonDangerBg);
+}

@@ -72,10 +72,13 @@
         }
 
         const themeColorDefault = {
-            background: ['#cccccc', '#414141']
+            background: ['#cccccc', '#18191a'],
+            color: ['#000000', '#E4E6EB']
         }
 
-        window.themeColor = {...themeColorDefault}
+        window.themeColor = structuredClone(themeColorDefault)
+
+
         let themeObj
         try {
             themeObj = JSON.parse(localStorage.getItem(themeDataKey))
@@ -159,6 +162,13 @@
                     PrefersColorScheme.redraw()
                 })
             }
+
+            document.querySelectorAll('.theme-reset').forEach(b => b.addEventListener('click', () => {
+                window.themeColor = structuredClone(themeColorDefault)
+                localStorage.removeItem(themeDataKey)
+                PrefersColorScheme.redraw()
+                setThemeColorInput()
+            }))
         })
 
     </script>
@@ -191,6 +201,8 @@
             </label>
         </div>
     </form>
+    <br>
+    <button type="button" class="theme-reset">Цвета по умолчанию</button>
 </aside>
 <main class="main-content">
     <div class="main-content-inner">

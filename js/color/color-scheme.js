@@ -8,7 +8,6 @@ export class ColorScheme {
     constructor(index) {
         this.index = index
 
-
         for (const [k, v] of Object.entries(window.themeColor)) {
             this.colors[k] = v[index]
         }
@@ -21,11 +20,19 @@ export class ColorScheme {
      * @param {string} hex
      */
     setColor(name, hex) {
-        const color = Color.fromHex(hex).hex2rgb().rgb2hsl()
+        const a = Color.fromHex(hex).hex2hsl
+
+        console.log(`${a.rgb.hsl} ${a.rgb.hsl.css} | ${a.rgb.toHsl} ${a.rgb.toHsl.css}`)
+
+        if (1) return
 
         switch (name) {
             case 'background':
-                this.colors.background = color.hsl2hex
+                this.colors.background = a.hsl2hex.hex.toString()
+                const c = a.clone
+
+                this.colors.color = c.hsl2hex.hex.toString()
+
         }
 
         for (const [k, v] of Object.entries(this.colors)) {
