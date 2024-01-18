@@ -1,5 +1,4 @@
-import {Hsluv} from './hsluv-lib.js'
-import {HEX} from './scheme/HEX.js'
+import {HSLUV} from './scheme/HSLUV.js'
 
 export class ColorScheme {
 
@@ -21,27 +20,19 @@ export class ColorScheme {
      * @param {string} hex
      */
     setColor(name, hex) {
-        const hsluv = new Hsluv()
-        hsluv.hex = hex
-        hsluv.hexToHsluv()
-        hsluv.hsluvToHex()
-
-        const hx = new HEX()
-        hx.hex = hex
-
-// return this.rgb.xyz.luv.lch.hsluv
-
-        console.log(`${hex} ${hsluv.hex} || ${hx.hsluv}  | ${hsluv.hsluv_h.toFixed(2)},${hsluv.hsluv_s.toFixed(2)},${hsluv.hsluv_l.toFixed(2)} | `)
-
-        if (1) return
+        const isDark = this.index === 1
 
         switch (name) {
             case 'background':
-                this.colors.background = a.hsl2hex.hex.toString()
-                const c = a.clone
+                const background = HSLUV.fromHexString(hex)
+                this.colors.background = background.hex.toString()
 
-                this.colors.color = c.hsl2hex.hex.toString()
+                const color = background.clone
+                color.l += background.l > 50 ? -50 : 50
+                this.colors.color = color.hex.toString()
 
+
+                this.colors.muted = background.rgb.blend(color.rgb, isDark ? .7 : .54).hex.toString()
         }
 
         for (const [k, v] of Object.entries(this.colors)) {

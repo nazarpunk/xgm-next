@@ -1,11 +1,24 @@
 import {LUV} from './LUV.js'
+import {RGB} from './RGB.js'
 
 const epsilon = 0.0088564516
 const refY = 1.0
 const refU = 0.19783000664283
 const refV = 0.46831999493879
 const kappa = 903.2962962
+const m_r0 = 3.240969941904521
+const m_r1 = -1.537383177570093
+const m_r2 = -0.498610760293
+const m_g0 = -0.96924363628087
+const m_g1 = 1.87596750150772
+const m_g2 = 0.041555057407175
+const m_b0 = 0.055630079696993
+const m_b1 = -0.20397695888897
+const m_b2 = 1.056971514242878
+
 const yToL = Y => Y <= epsilon ? Y / refY * kappa : 116 * Math.pow(Y / refY, 1 / 3) - 16
+const fromLinear = c => c <= 0.0031308 ? 12.92 * c : 1.055 * Math.pow(c, 1 / 2.4) - 0.055
+
 
 export class XYZ {
     x = 0
@@ -35,5 +48,15 @@ export class XYZ {
         }
 
         return luv
+    }
+
+    get rgb() {
+        const rgb = new RGB()
+
+        rgb.r = fromLinear(m_r0 * this.x + m_r1 * this.y + m_r2 * this.z)
+        rgb.g = fromLinear(m_g0 * this.x + m_g1 * this.y + m_g2 * this.z)
+        rgb.b = fromLinear(m_b0 * this.x + m_b1 * this.y + m_b2 * this.z)
+
+        return rgb
     }
 }

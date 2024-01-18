@@ -1,5 +1,10 @@
 import {RGB} from './RGB.js'
 
+/** @typedef {import('./LCH.js').LCH} LCH */
+/** @typedef {import('./HSLUV.js').HSLUV} HSLUV */
+/** @typedef {import('./HPLUV.js').HPLUV} HPLUV */
+
+
 const hexChars = '0123456789abcdef'
 
 /**
@@ -17,7 +22,8 @@ const hexToRgbChannel = (hex, offset) => {
 export class HEX {
     hex = '#000000'
 
-    toString(){
+    /** @returns {string} */
+    toString() {
         return this.hex
     }
 
@@ -32,8 +38,19 @@ export class HEX {
         return rgb
     }
 
+    /** @returns {LCH} */
+    get lch() {
+        return this.rgb.xyz.luv.lch
+    }
+
+    /** @returns {HSLUV} */
     get hsluv() {
         return this.rgb.xyz.luv.lch.hsluv
+    }
+
+    /** @returns {HPLUV} */
+    get hpluv() {
+        return this.rgb.xyz.luv.lch.hpluv
     }
 
 }
