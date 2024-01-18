@@ -1,20 +1,9 @@
-export class lab {
-    /**
-     * @param {Color} color
-     */
-    constructor(color) {
-        this._color = color
-    }
-
-    /**
-     * @private
-     * @type {Color}
-     */
-    _color
-
+export class LAB {
     l = 0
     a = 0
     b = 0
+
+    // === legacy
 
     /**
      * @return {Color}

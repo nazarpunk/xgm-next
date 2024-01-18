@@ -1,4 +1,5 @@
-import {Color} from './color.js'
+import {Hsluv} from './hsluv-lib.js'
+import {HEX} from './scheme/HEX.js'
 
 export class ColorScheme {
 
@@ -20,9 +21,17 @@ export class ColorScheme {
      * @param {string} hex
      */
     setColor(name, hex) {
-        const a = Color.fromHex(hex).hex2hsl
+        const hsluv = new Hsluv()
+        hsluv.hex = hex
+        hsluv.hexToHsluv()
+        hsluv.hsluvToHex()
 
-        console.log(`${a.rgb.hsl} ${a.rgb.hsl.css} | ${a.rgb.toHsl} ${a.rgb.toHsl.css}`)
+        const hx = new HEX()
+        hx.hex = hex
+
+// return this.rgb.xyz.luv.lch.hsluv
+
+        console.log(`${hex} ${hsluv.hex} || ${hx.hsluv}  | ${hsluv.hsluv_h.toFixed(2)},${hsluv.hsluv_s.toFixed(2)},${hsluv.hsluv_l.toFixed(2)} | `)
 
         if (1) return
 

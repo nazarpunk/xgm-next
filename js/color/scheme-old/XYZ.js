@@ -1,26 +1,12 @@
-export class xyz {
-    /**
-     * @param {Color} color
-     */
-    constructor(color) {
-        this._color = color
-    }
+import {LUV} from './LUV.js'
 
-    /**
-     * @private
-     * @type {Color}
-     */
-    _color
-
+export class XYZ {
     x = 0
     y = 0
     z = 0
 
-    /**
-     * @return {Color}
-     */
-    toLuv() {
-        const luv = this._color.luv
+    get luv() {
+        const luv = new LUV()
 
         const divider = this.x + 15 * this.y + 3 * this.z
         let varU = 4 * this.x
@@ -32,17 +18,19 @@ export class xyz {
             varU = NaN
             varV = NaN
         }
-        luv.l = luv.yToL(this.y)
+        luv.l = LUV.y2l(this.y)
         if (luv.l === 0) {
             luv.u = 0
             luv.v = 0
         } else {
-            luv.u = 13 * luv.l * (varU - luv.refU)
-            luv.v = 13 * luv.l * (varV - luv.refV)
+            luv.u = 13 * luv.l * (varU - LUV.refU)
+            luv.v = 13 * luv.l * (varV - LUV.refV)
         }
 
-        return this._color
+        return luv
     }
+
+    // === legacy
 
     /**
      * @param {number} c
@@ -57,9 +45,9 @@ export class xyz {
      */
     toRgb() {
         const rgb = this._color.rgb
-        rgb.r = xyz.fromLinear(rgb24.m_r0 * this.x + rgb24.m_r1 * this.y + rgb24.m_r2 * this.z)
-        rgb.g = xyz.fromLinear(rgb24.m_g0 * this.x + rgb24.m_g1 * this.y + rgb24.m_g2 * this.z)
-        rgb.b = xyz.fromLinear(rgb24.m_b0 * this.x + rgb24.m_b1 * this.y + rgb24.m_b2 * this.z)
+        rgb.r = XYZ.fromLinear(RGB24.m_r0 * this.x + RGB24.m_r1 * this.y + RGB24.m_r2 * this.z)
+        rgb.g = XYZ.fromLinear(RGB24.m_g0 * this.x + RGB24.m_g1 * this.y + RGB24.m_g2 * this.z)
+        rgb.b = XYZ.fromLinear(RGB24.m_b0 * this.x + RGB24.m_b1 * this.y + RGB24.m_b2 * this.z)
         return this._color
     }
 

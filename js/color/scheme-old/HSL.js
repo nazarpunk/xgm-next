@@ -1,9 +1,9 @@
 import {RGB} from './RGB.js'
 
 export class HSL {
-    h = 0
-    s = 0
-    l = 0
+    h = 0 // [0, 1]
+    s = 0 // [0, 1]
+    l = 0 // [0, 1]
 
     get clone() {
         const hsl = new HSL()
@@ -23,7 +23,7 @@ export class HSL {
         const rgb = new RGB()
 
         if (this.s === 0) {
-            rgb.r = rgb.g = rgb.b = trunc(rgb.l) // achromatic
+            rgb.r = rgb.g = rgb.b = trunc(this.l) // achromatic
             return rgb
         }
 

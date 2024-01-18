@@ -1,6 +1,6 @@
-import {luv} from './luv'
+import {LUV} from './LUV.js'
 
-export class rgb24 {
+export class RGB24 {
 
     // 6 lines in slope-intercept format: R < 0, R > 1, G < 0, G > 1, B < 0, B > 1
     r0s = 0
@@ -29,16 +29,16 @@ export class rgb24 {
     /** @param {number} l */
     calcBoundingLines(l) {
         const sub1 = Math.pow(l + 16, 3) / 1560896
-        const sub2 = sub1 > luv.epsilon ? sub1 : l / luv.kappa
-        const s1r = sub2 * (284517 * rgb24.m_r0 - 94839 * rgb24.m_r2)
-        const s2r = sub2 * (838422 * rgb24.m_r2 + 769860 * rgb24.m_r1 + 731718 * rgb24.m_r0)
-        const s3r = sub2 * (632260 * rgb24.m_r2 - 126452 * rgb24.m_r1)
-        const s1g = sub2 * (284517 * rgb24.m_g0 - 94839 * rgb24.m_g2)
-        const s2g = sub2 * (838422 * rgb24.m_g2 + 769860 * rgb24.m_g1 + 731718 * rgb24.m_g0)
-        const s3g = sub2 * (632260 * rgb24.m_g2 - 126452 * rgb24.m_g1)
-        const s1b = sub2 * (284517 * rgb24.m_b0 - 94839 * rgb24.m_b2)
-        const s2b = sub2 * (838422 * rgb24.m_b2 + 769860 * rgb24.m_b1 + 731718 * rgb24.m_b0)
-        const s3b = sub2 * (632260 * rgb24.m_b2 - 126452 * rgb24.m_b1)
+        const sub2 = sub1 > LUV.epsilon ? sub1 : l / LUV.kappa
+        const s1r = sub2 * (284517 * RGB24.m_r0 - 94839 * RGB24.m_r2)
+        const s2r = sub2 * (838422 * RGB24.m_r2 + 769860 * RGB24.m_r1 + 731718 * RGB24.m_r0)
+        const s3r = sub2 * (632260 * RGB24.m_r2 - 126452 * RGB24.m_r1)
+        const s1g = sub2 * (284517 * RGB24.m_g0 - 94839 * RGB24.m_g2)
+        const s2g = sub2 * (838422 * RGB24.m_g2 + 769860 * RGB24.m_g1 + 731718 * RGB24.m_g0)
+        const s3g = sub2 * (632260 * RGB24.m_g2 - 126452 * RGB24.m_g1)
+        const s1b = sub2 * (284517 * RGB24.m_b0 - 94839 * RGB24.m_b2)
+        const s2b = sub2 * (838422 * RGB24.m_b2 + 769860 * RGB24.m_b1 + 731718 * RGB24.m_b0)
+        const s3b = sub2 * (632260 * RGB24.m_b2 - 126452 * RGB24.m_b1)
         this.r0s = s1r / s3r
         this.r0i = s2r * l / s3r
         this.r1s = s1r / (s3r + 126452)

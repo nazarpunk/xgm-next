@@ -1,20 +1,29 @@
-export class lch {
-    /**
-     * @param {Color} color
-     */
-    constructor(color) {
-        this._color = color
-    }
+import {HSLUV} from './HSLUV.js'
+import {RGB24} from './RGB24.js'
 
-    /**
-     * @private
-     * @type {Color}
-     */
-    _color
-
+export class LCH {
     l = 0
     c = 0
     h = 0
+
+    get hsluv() {
+        const hsluv = new HSLUV()
+
+        if (this.l > 99.9999999) {
+            hsluv.s = 0
+            hsluv.l = 100
+        } else if (this.l < 0.00000001) {
+            hsluv.s = 0
+            hsluv.l = 0
+        } else {
+            new RGB24().calcBoundingLines(this.l)
+            hsluv.s = this.c / hsluv.maxChroma(this.h) * 100
+            hsluv.l = this.l
+        }
+        hsluv.h = this.h
+
+        return hsluv
+    }
 
     /**
      * @return {Color}
@@ -34,28 +43,6 @@ export class lch {
             hpluv.l = this.l
         }
         hpluv.h = this.h
-
-        return this._color
-    }
-
-    /**
-     * @return {Color}
-     */
-    toHsluv() {
-        const hsluv = this._color.hsluv
-
-        if (this.l > 99.9999999) {
-            hsluv.s = 0
-            hsluv.l = 100
-        } else if (this.l < 0.00000001) {
-            hsluv.s = 0
-            hsluv.l = 0
-        } else {
-            this._color.rgb24.calcBoundingLines(this.l)
-            hsluv.s = this.c / hsluv.maxChroma(this.h) * 100
-            hsluv.l = this.l
-        }
-        hsluv.h = this.h
 
         return this._color
     }

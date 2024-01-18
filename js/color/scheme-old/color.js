@@ -1,11 +1,19 @@
-import {HEX} from './scheme/HEX.js'
-import {RGB} from './scheme/RGB.js'
-import {HSL} from './scheme/HSL.js'
+import {HEX} from './HEX.js'
+import {RGB} from './RGB.js'
+import {HSL} from './HSL.js'
+import {XYZ} from './XYZ.js'
+import {LUV} from './LUV.js'
+import {LCH} from './LCH.js'
+import {HSLUV} from './HSLUV.js'
 
 export class Color {
     hex = new HEX()
     rgb = new RGB()
     hsl = new HSL()
+    xyz = new XYZ()
+    luv = new LUV()
+    lch = new LCH()
+    hsluv = new HSLUV()
 
     get clone() {
         const c = new Color()
@@ -33,6 +41,15 @@ export class Color {
 
     get hex2hsl() {
         this.hex2rgb.hsl = this.rgb.hsl
+        return this
+    }
+
+    get hex2hsluv() {
+        this.rgb = this.hex.rgb
+        this.xyz = this.rgb.xyz
+        this.luv = this.xyz.luv
+        this.lch = this.luv.lch
+        this.hsluv = this.lch.hsluv
         return this
     }
 
