@@ -31,8 +31,7 @@ export class ColorScheme {
                 color.l += background.l > 50 ? -50 : 50
                 this.colors.color = color.hex.toString()
 
-
-                this.colors.muted = background.rgb.blend(color.rgb, isDark ? .7 : .54).hex.toString()
+                this.colors.muted = color.rgb.blend(background.rgb, isDark ? .7 : .54).hex.toString()
         }
 
         for (const [k, v] of Object.entries(this.colors)) {

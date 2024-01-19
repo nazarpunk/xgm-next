@@ -23,8 +23,9 @@ body {
     grid-template-columns: 300px 1fr;
 
     font-family: Verdana, Helvetica Neue, Helvetica, Arial, sans-serif;
-}
 
+    gap: 1rem;
+}
 
 .main-header {
     grid-area: header;

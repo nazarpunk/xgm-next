@@ -1,5 +1,5 @@
 import {LCH} from './LCH.js'
-import {Chroma} from './Chroma.js'
+import {Chroma} from './utils/Chroma.js'
 import {HEX} from './HEX.js'
 
 /** @typedef {import('./RGB.js').RGB} RGB */
