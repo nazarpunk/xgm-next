@@ -73,6 +73,7 @@
 
         const themeColorDefault = {
             background: ['#cccccc', '#18191a'],
+            background_block: ['#e7e7e7', '#2a2c2c'],
             color: ['#000000', '#E4E6EB'],
             muted: ['#888888', '#7e7f83'],
         }
@@ -176,11 +177,11 @@
 </head>
 <body>
 <!-- https://www.w3.org/TR/2013/CR-html5-20130806/sections.html#the-article-element -->
-<header class="main-header">
+<header class="main-header block">
     <h1>Шапка</h1>
     <day-night></day-night>
 </header>
-<aside class="main-sidemenu">
+<aside class="main-sidemenu block">
     <h1>Меню</h1>
     <form class="theme-form">
         <div>
@@ -205,26 +206,24 @@
     <br>
     <button type="button" class="theme-reset">Цвета по умолчанию</button>
 </aside>
-<main class="main-content">
-    <div class="main-content-inner">
-        <h1>Контент</h1>
-        <h2>Фон и цвет текста</h2>
-        <label>
-            <input type="color" class="theme-color-input" data-name="background">
-        </label>
-        <p>Пожалуй самая важная пара цветов, которая, как и ковёр, задаёт стиль всему сайту.</p>
-        <p>Так как наша задача не дать пользователю нарулить вырвиглазное нечто, то мы воспользуемся
-            <a href="https://www.hsluv.org/">HSLuv</a>,
-            который, по заявлению авторов более дружественный к <strike>кожаным мешкам</strike> людям.</p>
-        <p class="text-muted">Часто необходимая вещь, это затенёный текст, который в простонародии прозвали <b>muted</b>.
-            Обычно, всякие косорукие макаки делают его через прозрачность. Но мы будем умнее и просто смешаем два цвета.
-        </p>
-        <p class="text-muted">Коэфициент смешивания отличается для светлой и тёмной темы, так что эксперемнтируйте на здоровье.</p>
-
-    </div>
+<main class="main-content block">
+    <h1>Контент</h1>
+    <h2>Фон и цвет текста</h2>
+    <label>
+        <input type="color" class="theme-color-input" data-name="background">
+        Установить фон
+    </label>
+    <p>Пожалуй самая важная пара цветов, которая, как и ковёр, задаёт стиль всему сайту.</p>
+    <p>Так как наша задача не дать пользователю нарулить вырвиглазное нечто, то мы воспользуемся
+        <a href="https://www.hsluv.org/">HSLuv</a>,
+        который, по заявлению авторов более дружественный к <strike>кожаным мешкам</strike> людям.</p>
+    <p class="text-muted">Часто необходимая вещь, это затенёный текст, который в простонародии прозвали <b>muted</b>.
+        Обычно, всякие косорукие макаки делают его через прозрачность. Но мы будем умнее и просто смешаем два цвета.
+    </p>
+    <p class="text-muted">Коэфициент смешивания отличается для светлой и тёмной темы, так что эксперемнтируйте на здоровье.</p>
 </main>
-<section class="main-comments"><h1>Комментарии</h1></section>
-<footer class="main-footer"><h1>Подвал</h1></footer>
+<section class="main-comments block"><h1>Комментарии</h1></section>
+<footer class="main-footer block"><h1>Подвал</h1></footer>
 
 </body>
 </html>

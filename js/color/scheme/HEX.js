@@ -45,12 +45,12 @@ export class HEX {
 
     /** @returns {HSLUV} */
     get hsluv() {
-        return this.rgb.xyz.luv.lch.hsluv
+        return this.lch.hsluv
     }
 
     /** @returns {HPLUV} */
     get hpluv() {
-        return this.rgb.xyz.luv.lch.hpluv
+        return this.lch.hpluv
     }
 
 }

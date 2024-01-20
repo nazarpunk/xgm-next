@@ -27,11 +27,15 @@ export class ColorScheme {
                 const background = HSLUV.fromHexString(hex)
                 this.colors.background = background.hex.toString()
 
-                const color = background.clone
-                color.l += background.l > 50 ? -50 : 50
+                const block = background.clone
+                block.l += block.l > 10 ? -10 : 10
+                this.colors.background_block = block.hex.toString()
+
+                const color = block.clone
+                color.l += color.l > 50 ? -50 : 50
                 this.colors.color = color.hex.toString()
 
-                this.colors.muted = color.rgb.blend(background.rgb, isDark ? .7 : .54).hex.toString()
+                this.colors.muted = color.rgb.blend(block.rgb, isDark ? .7 : .54).hex.toString()
         }
 
         for (const [k, v] of Object.entries(this.colors)) {

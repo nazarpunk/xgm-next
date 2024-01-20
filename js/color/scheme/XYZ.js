@@ -1,5 +1,6 @@
 import {LUV} from './LUV.js'
 import {RGB} from './RGB.js'
+import {LAB} from './LAB.js'
 
 const epsilon = 0.0088564516
 const refY = 1.0
@@ -58,5 +59,25 @@ export class XYZ {
         rgb.b = fromLinear(m_b0 * this.x + m_b1 * this.y + m_b2 * this.z)
 
         return rgb
+    }
+
+
+    get lab() {
+        let {x, y, z} = this
+
+        x /= 0.94811
+        z /= 1.07304
+
+        x = x > 0.008856 ? Math.pow(x, 1 / 3) : 7.787 * x + 16 / 116
+        y = y > 0.008856 ? Math.pow(y, 1 / 3) : 7.787 * y + 16 / 116
+        z = z > 0.008856 ? Math.pow(z, 1 / 3) : 7.787 * z + 16 / 116
+
+        const lab = new LAB()
+
+        lab.l = 116 * y - 16
+        lab.a = 500 * (x - y)
+        lab.b = 200 * (y - z)
+
+        return lab
     }
 }
